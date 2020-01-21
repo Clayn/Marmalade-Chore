@@ -23,44 +23,34 @@
  */
 package net.bplaced.clayn.marmalade.core.script;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public interface ScriptExecutionEngine
 {
-    private String jam;
-    private String module;
     
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
-
-    public List<StepParameterDeclaration> getParameters()
-    {
-        return parameters;
-    }
-
-    public String getJam()
-    {
-        return jam;
-    }
-
-    public void setJam(String jam)
-    {
-        this.jam = jam;
-    }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
+    boolean isSupported(EngineFeature feature);
     
+    void register(ExecutionModule module);
+    
+    void setVariable(String name, String val);
+    
+    default void setVariable(String name, Object val) {
+        Objects.requireNonNull(name);
+        if(val==null) {
+            return;
+        }
+        setVariable(name, val.toString());
+    }
+    
+    default void setVariable(String name, VariableObject val) {
+        Objects.requireNonNull(name);
+        if(val==null) {
+            return;
+        }
+        setVariable(name, val.toRuntimeString());
+    }
 }

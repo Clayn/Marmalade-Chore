@@ -23,44 +23,30 @@
  */
 package net.bplaced.clayn.marmalade.core.script;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public class ModuleExecutionException extends Exception
 {
-    private String jam;
-    private String module;
-    
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
 
-    public List<StepParameterDeclaration> getParameters()
+    public ModuleExecutionException()
     {
-        return parameters;
     }
 
-    public String getJam()
+    public ModuleExecutionException(String message)
     {
-        return jam;
+        super(message);
     }
 
-    public void setJam(String jam)
+    public ModuleExecutionException(String message, Throwable cause)
     {
-        this.jam = jam;
+        super(message, cause);
     }
 
-    public String getModule()
+    public ModuleExecutionException(Throwable cause)
     {
-        return module;
+        super(cause);
     }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
     
 }

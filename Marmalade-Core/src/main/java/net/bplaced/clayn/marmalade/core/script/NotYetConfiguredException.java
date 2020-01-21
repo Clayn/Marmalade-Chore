@@ -23,44 +23,16 @@
  */
 package net.bplaced.clayn.marmalade.core.script;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public class NotYetConfiguredException extends RuntimeException
 {
-    private String jam;
-    private String module;
-    
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
 
-    public List<StepParameterDeclaration> getParameters()
+    public NotYetConfiguredException(String message)
     {
-        return parameters;
+        super(message);
     }
-
-    public String getJam()
-    {
-        return jam;
-    }
-
-    public void setJam(String jam)
-    {
-        this.jam = jam;
-    }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
     
 }

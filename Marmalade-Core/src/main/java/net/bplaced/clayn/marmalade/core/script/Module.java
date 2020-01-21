@@ -23,44 +23,21 @@
  */
 package net.bplaced.clayn.marmalade.core.script;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import net.bplaced.clayn.marmalade.core.util.Parameter;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public interface Module
 {
-    private String jam;
-    private String module;
+    String getName();
     
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
-
-    public List<StepParameterDeclaration> getParameters()
-    {
-        return parameters;
-    }
-
-    public String getJam()
-    {
-        return jam;
-    }
-
-    public void setJam(String jam)
-    {
-        this.jam = jam;
-    }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
+    String getJam();
     
+    List<Parameter<?>> getConfigurationParameters();
+    
+    void configure(Map<String,Object> config);
 }

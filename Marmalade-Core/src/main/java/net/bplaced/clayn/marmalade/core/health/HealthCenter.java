@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2020 Clayn <clayn_osmato@gmx.de>.
+ * Copyright 2019 Clayn <clayn_osmato@gmx.de>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,46 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.bplaced.clayn.marmalade.core.script;
-
-import java.util.ArrayList;
-import java.util.List;
+package net.bplaced.clayn.marmalade.core.health;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public class HealthCenter
 {
-    private String jam;
-    private String module;
+    private static final HealthCenter INSTANCE=new HealthCenter();
+    private final ErrorCenter errorCenter=new ErrorCenter();
+    private HealthCenter()
+    {
+    }
     
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
-
-    public List<StepParameterDeclaration> getParameters()
-    {
-        return parameters;
+    public static HealthCenter getHealthCenter() {
+        return INSTANCE;
     }
 
-    public String getJam()
+    public static ErrorCenter getErrorCenter()
     {
-        return jam;
+        return INSTANCE.errorCenter;
     }
-
-    public void setJam(String jam)
-    {
-        this.jam = jam;
-    }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
+    
     
 }

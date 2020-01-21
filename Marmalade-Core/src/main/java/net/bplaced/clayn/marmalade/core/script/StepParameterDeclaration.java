@@ -23,44 +23,30 @@
  */
 package net.bplaced.clayn.marmalade.core.script;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public class StepParameterDeclaration
 {
-    private String jam;
-    private String module;
+    private final String name;
+    private final Object value;
+
+    public StepParameterDeclaration(String name, Object value)
+    {
+        this.name = name;
+        this.value = value;
+    }
     
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
-
-    public List<StepParameterDeclaration> getParameters()
+    public String getName()
     {
-        return parameters;
+        return name;
     }
 
-    public String getJam()
+    public Object getValue()
     {
-        return jam;
+        return value;
     }
-
-    public void setJam(String jam)
-    {
-        this.jam = jam;
-    }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
     
+     
 }

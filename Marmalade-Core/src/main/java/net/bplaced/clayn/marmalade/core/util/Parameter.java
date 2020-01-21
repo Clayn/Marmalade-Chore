@@ -21,46 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.bplaced.clayn.marmalade.core.script;
-
-import java.util.ArrayList;
-import java.util.List;
+package net.bplaced.clayn.marmalade.core.util;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
+ * @param <T>
  */
-public class ScriptStep
+public class Parameter<T>
 {
-    private String jam;
-    private String module;
-    
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
 
-    public List<StepParameterDeclaration> getParameters()
+    private final Class<T> type;
+    private final String name;
+
+    public Parameter(Class<T> type, String name)
     {
-        return parameters;
+        this.type = type;
+        this.name = name;
     }
 
-    public String getJam()
+    public String getName()
     {
-        return jam;
+        return name;
     }
 
-    public void setJam(String jam)
+    public Class<T> getType()
     {
-        this.jam = jam;
+        return type;
     }
 
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
-    
 }

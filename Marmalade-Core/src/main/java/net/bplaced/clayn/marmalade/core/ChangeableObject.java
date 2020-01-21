@@ -2,6 +2,7 @@ package net.bplaced.clayn.marmalade.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 /**
@@ -13,7 +14,8 @@ import java.util.function.Consumer;
 public class ChangeableObject<T>
 {
 
-    private final List<Consumer> listeners = new ArrayList<>();
+    protected final List<Consumer> listeners = new ArrayList<>();
+    private final AtomicBoolean changesLocked = new AtomicBoolean(false);
 
     public void addListener(Consumer<? super T> listener)
     {
@@ -25,8 +27,31 @@ public class ChangeableObject<T>
         listeners.remove(listener);
     }
 
-    public final void changed()
+    public final void lockChanges()
     {
+        changesLocked.set(true);
+    }
+
+    public final void unlockChanges(boolean changed)
+    {
+        changesLocked.set(false);
+        if (changed)
+        {
+            changed();
+        }
+    }
+
+    public final void unlockChanges()
+    {
+        unlockChanges(false);
+    }
+
+    protected final void changed()
+    {
+        if (changesLocked.get())
+        {
+            return;
+        }
         for (Consumer listener : listeners)
         {
             listener.accept(this);

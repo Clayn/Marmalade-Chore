@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2020 Clayn <clayn_osmato@gmx.de>.
+ * Copyright 2019 Clayn <clayn_osmato@gmx.de>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,46 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.bplaced.clayn.marmalade.core.script;
+package net.bplaced.clayn.marmalade.core.health;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import net.bplaced.clayn.marmalade.core.util.Clearable;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ScriptStep
+public class ErrorCenter implements Clearable
 {
-    private String jam;
-    private String module;
+
+    private final Map<Long, Throwable> errors = new HashMap<>();
+
+    ErrorCenter()
+    {
+    }
     
-    private final List<StepParameterDeclaration> parameters=new ArrayList<>();
-
-    public List<StepParameterDeclaration> getParameters()
-    {
-        return parameters;
+    public void report(Throwable t) {
+        errors.put(System.currentTimeMillis(), t);
     }
 
-    public String getJam()
-    {
-        return jam;
+    public Map<Long,Throwable> getReportedErrors() {
+        return Collections.unmodifiableMap(errors);
     }
 
-    public void setJam(String jam)
+    @Override
+    public void clear()
     {
-        this.jam = jam;
+        errors.clear();
     }
-
-    public String getModule()
-    {
-        return module;
-    }
-
-    public void setModule(String module)
-    {
-        this.module = module;
-    }
-
-    
 }
