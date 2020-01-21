@@ -15,4 +15,4 @@ jobs:
         java-version: 11
     - name: Build with Maven
       working-directory: Marmalade-Core
-      run: mvn -B package
+      run: mvn -B test
