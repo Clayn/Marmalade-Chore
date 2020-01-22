@@ -17,9 +17,9 @@ node {
         
 		stage('Build') {
             if (isUnix()) {
-                sh "'${mvnHome}/bin/mvn' -DskipTests install"
+                sh "'${mvnHome}/bin/mvn' -DskipTests compile"
             } else {
-                bat(/"${mvnHome}\bin\mvn" -DskipTests install/)
+                bat(/"${mvnHome}\bin\mvn" -DskipTests compile/)
             }
         }
         stage('Test') {
@@ -29,11 +29,11 @@ node {
                 bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore=true test/)
             }
         }
-        stage('Reporting') {
+        stage('Install') {
             if (isUnix()) {
-                sh "'${mvnHome}/bin/mvn' -DskipTests site"
+                sh "'${mvnHome}/bin/mvn' -DskipTests install"
             } else {
-                bat(/"${mvnHome}\bin\mvn" -DskipTests site/)
+                bat(/"${mvnHome}\bin\mvn" -DskipTests install/)
             }
         }
         stage('Results') {
