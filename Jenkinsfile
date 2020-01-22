@@ -39,5 +39,12 @@ node {
         stage('Results') {
             junit allowEmptyResults: true, testResults: '**/TEST-*.xml'
         }
+	   stage('Report') {
+            if (isUnix()) {
+                sh "'${mvnHome}/bin/mvn' -DskipTests site"
+            } else {
+                bat(/"${mvnHome}\bin\mvn" -DskipTests site/)
+            }
+        }
    }
 }
