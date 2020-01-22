@@ -1,5 +1,7 @@
 node {
    def mvnHome
+  def jdk = tool name: 'JDK 11'
+  env.JAVA_HOME = "${jdk}"
    stage('Preparation') { 
 			checkout scm
             mvnHome = tool 'Maven'
