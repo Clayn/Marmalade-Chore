@@ -14,8 +14,8 @@ import java.util.function.Consumer;
 public class ChangeableObject<T>
 {
 
-    protected final List<Consumer> listeners = new ArrayList<>();
-    private final AtomicBoolean changesLocked = new AtomicBoolean(false);
+    protected transient final List<Consumer> listeners = new ArrayList<>();
+    private transient final AtomicBoolean changesLocked = new AtomicBoolean(false);
 
     public void addListener(Consumer<? super T> listener)
     {
