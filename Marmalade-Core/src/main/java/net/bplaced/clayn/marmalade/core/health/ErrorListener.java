@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 Clayn <clayn_osmato@gmx.de>.
+ * Copyright 2020 Clayn <clayn_osmato@gmx.de>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,46 +23,11 @@
  */
 package net.bplaced.clayn.marmalade.core.health;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import net.bplaced.clayn.marmalade.core.util.Clearable;
-
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
  */
-public class ErrorCenter implements Clearable
+public interface ErrorListener
 {
-
-    private final Map<Long, Throwable> errors = new HashMap<>();
-    private final List<ErrorListener> listeners=new ArrayList<>();
-    ErrorCenter()
-    {
-    }
-    
-    public void addListener(ErrorListener listener) {
-        listeners.add(listener);
-    }
-    
-    public void removeListener(ErrorListener listener) {
-        listeners.remove(listener);
-    }
-    
-    public void report(Throwable t) {
-        errors.put(System.currentTimeMillis(), t);
-        listeners.forEach((l)->l.onError(t));
-    }
-
-    public Map<Long,Throwable> getReportedErrors() {
-        return Collections.unmodifiableMap(errors);
-    }
-
-    @Override
-    public void clear()
-    {
-        errors.clear();
-    }
+    void onError(Throwable t);
 }
