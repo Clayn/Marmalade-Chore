@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import net.bplaced.clayn.marmalade.core.util.Clearable;
 
 /**
@@ -49,6 +50,13 @@ public class ErrorCenter implements Clearable
     
     public void removeListener(ErrorListener listener) {
         listeners.remove(listener);
+    }
+    
+    public void report(Throwable t,Function<? super Throwable,? extends RuntimeException> thrower) {
+        report(t);
+        if(thrower!=null) {
+            throw thrower.apply(t);
+        }
     }
     
     public void report(Throwable t) {

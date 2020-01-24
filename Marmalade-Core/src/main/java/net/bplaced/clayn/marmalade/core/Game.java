@@ -1,6 +1,7 @@
 package net.bplaced.clayn.marmalade.core;
 
 import java.io.File;
+import java.net.URI;
 
 /**
  *
@@ -12,6 +13,7 @@ public class Game extends ChangeableObject<Game>
     private String name="";
     private String description="";
     private File executable=null;
+    private URI image=null;
 
     public Game()
     {
@@ -21,6 +23,7 @@ public class Game extends ChangeableObject<Game>
         name=orig.getName();
         description=orig.getDescription();
         executable=orig.getExecutable();
+        image=orig.getImage();
     }
 
     public String getName()
@@ -48,9 +51,27 @@ public class Game extends ChangeableObject<Game>
         return executable;
     }
 
+    public URI getImage()
+    {
+        return image;
+    }
+
+    public void setImage(URI image)
+    {
+        this.image = image;
+    }
+    
+    
+
     public void setExecutable(File executable)
     {
         this.executable = executable;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Game{" + "name=" + name + ", description=" + description + ", executable=" + executable + ", image=" + image + '}';
     }
     
     
