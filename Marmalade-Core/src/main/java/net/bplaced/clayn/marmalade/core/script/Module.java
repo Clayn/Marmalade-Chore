@@ -25,8 +25,6 @@ package net.bplaced.clayn.marmalade.core.script;
 
 import java.util.List;
 import java.util.Map;
-import net.bplaced.clayn.marmalade.core.util.Parameter;
-
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
@@ -37,7 +35,7 @@ public interface Module
     
     String getJam();
     
-    List<Parameter<?>> getConfigurationParameters();
+    List<ModuleParameter> getConfigurationParameters();
     
     void configure(Map<String,Object> config);
 }

@@ -21,23 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.bplaced.clayn.marmalade.core.util;
+package net.bplaced.clayn.marmalade.core.script;
 
 /**
  *
  * @author Clayn <clayn_osmato@gmx.de>
- * @param <T>
  */
-public class Parameter<T>
+public class ModuleParameter
 {
 
-    private final Class<T> type;
-    private final String name;
-
-    public Parameter(Class<T> type, String name)
+    public static enum ParameterType
     {
-        this.type = type;
+        STRING, FILE, DIRECTORY, LONG, DOUBLE;
+    }
+
+    private final String name;
+    private final ParameterType type;
+    private final boolean listParameter;
+
+    public ModuleParameter(String name, ParameterType type,
+            boolean listParameter)
+    {
         this.name = name;
+        this.type = type;
+        this.listParameter = listParameter;
     }
 
     public String getName()
@@ -45,9 +52,14 @@ public class Parameter<T>
         return name;
     }
 
-    public Class<T> getType()
+    public ParameterType getType()
     {
         return type;
+    }
+
+    public boolean isListParameter()
+    {
+        return listParameter;
     }
 
 }

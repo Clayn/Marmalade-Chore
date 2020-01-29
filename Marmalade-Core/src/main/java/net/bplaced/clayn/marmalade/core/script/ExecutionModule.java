@@ -29,8 +29,5 @@ package net.bplaced.clayn.marmalade.core.script;
  */
 public interface ExecutionModule extends Module
 {
-
-    String getName();
-
     void execute() throws ModuleExecutionException;
 }
